@@ -18,7 +18,7 @@ Maven: Komut satırından mvn komutunun çalışıyor olması tavsiye edilir. In
 IntelliJ IDEA (önerilir): Geliştirme ortamı olarak kullanılmıştır.
 
 Adımlar
-1. Depoyu Klonlayın:   git clone https://github.com/SilaKarabag/GrispiContactsImporter.git
+1. Depoyu Klonlayın:   git clone https://github.com/SilaKarabag/GrispiContactsImporter.git            cd GrispiContactsImporter
 
 2. Projenin kök dizininde bulunan src/main/resources klasörüne, Grispi tarafından sağlanan veya örnek verilerle doldurduğunuz Grispi Import Template (1).xlsx adlı Excel dosyasını yerleştirin.
 
