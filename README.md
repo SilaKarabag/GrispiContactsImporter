@@ -64,4 +64,4 @@ tags ve groups: Virgülle ayrılmış stringler olarak beklenir ve JSON çıktı
 <img width="1919" height="1019" alt="Ekran görüntüsü 2025-07-28 144650" src="https://github.com/user-attachments/assets/55096a11-3969-4ec5-ae72-efb6ce405c7e" />
 <img width="588" height="777" alt="Ekran görüntüsü 2025-07-28 144944" src="https://github.com/user-attachments/assets/7deabb22-b4cc-4620-a527-e070b9574359" />
 <img width="1919" height="1027" alt="Ekran görüntüsü 2025-07-28 145315" src="https://github.com/user-attachments/assets/78dd6876-a398-4f63-b6f8-f1527cc5663f" />
-
+<img width="1919" height="1024" alt="Ekran görüntüsü 2025-07-28 145225" src="https://github.com/user-attachments/assets/2bfcca20-2fbf-45a8-aeab-3ff140f0fe96" />
