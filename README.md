@@ -19,8 +19,6 @@ IntelliJ IDEA (önerilir): Geliştirme ortamı olarak kullanılmıştır.
 
 Adımlar
 1. Depoyu Klonlayın:   git clone https://github.com/SilaKarabag/GrispiContactsImporter.git
-                       cd <proje-klasoru-adi>
-
 
 2. Projenin kök dizininde bulunan src/main/resources klasörüne, Grispi tarafından sağlanan veya örnek verilerle doldurduğunuz Grispi Import Template (1).xlsx adlı Excel dosyasını yerleştirin.
 
