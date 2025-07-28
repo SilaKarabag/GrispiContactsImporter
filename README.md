@@ -50,3 +50,5 @@ email: Geçerli bir e-posta formatına sahip olmalıdır.
 phone: E.164 formatında olmalıdır (örn: +905321234567). Eğer + işareti eksikse, uyarı verir ve kaydedilmez.
 enabled: TRUE veya FALSE (büyük/küçük harf duyarsız) olmalıdır, aksi takdirde varsayılan olarak false kabul edilir.
 tags ve groups: Virgülle ayrılmış stringler olarak beklenir ve JSON çıktısında string listelerine dönüştürülür.
+
+<img width="1908" height="907" alt="örnekExcel" src="https://github.com/user-attachments/assets/5c1dad34-0888-4280-943a-a5433ce6a685" />
