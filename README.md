@@ -57,13 +57,11 @@ tags ve groups: Virgülle ayrılmış stringler olarak beklenir ve JSON çıktı
 Örnek çıktılar:
 
 <img width="1919" height="1026" alt="Ekran görüntüsü 2025-07-28 144531" src="https://github.com/user-attachments/assets/49ce938d-f79c-408e-a0f9-1d8254923323" />
-<img width="1919" height="1026" alt="Ekran görüntüsü 2025-07-28 144531" src="https://github.com/user-attachments/assets/3ac2efb4-4f42-4d02-9813-2c56262e3a8c" />
-
+<img width="1919" height="993" alt="Ekran görüntüsü 2025-07-28 144551" src="https://github.com/user-attachments/assets/f24eb647-43f2-445e-bb23-aaec6771f2cf" />
 <img width="1919" height="1024" alt="Ekran görüntüsü 2025-07-28 144606" src="https://github.com/user-attachments/assets/b465a361-4bcd-462c-81fd-4f0bab6bfa4d" />
-
-
 <img width="1919" height="1028" alt="Ekran görüntüsü 2025-07-28 144627" src="https://github.com/user-attachments/assets/94c1917a-a56d-47c6-b732-e1ce11f9aebd" />
 <img width="1919" height="1024" alt="Ekran görüntüsü 2025-07-28 144639" src="https://github.com/user-attachments/assets/3336d8ea-69fb-4dd1-ac0f-1ab39b84f302" />
 <img width="1919" height="1019" alt="Ekran görüntüsü 2025-07-28 144650" src="https://github.com/user-attachments/assets/55096a11-3969-4ec5-ae72-efb6ce405c7e" />
 <img width="588" height="777" alt="Ekran görüntüsü 2025-07-28 144944" src="https://github.com/user-attachments/assets/7deabb22-b4cc-4620-a527-e070b9574359" />
 <img width="1919" height="1027" alt="Ekran görüntüsü 2025-07-28 145315" src="https://github.com/user-attachments/assets/78dd6876-a398-4f63-b6f8-f1527cc5663f" />
+
