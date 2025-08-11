@@ -38,12 +38,12 @@ Projenin hem frontend hem de backend kısımlarını ayrı ayrı çalıştırman
 ### Frontend'i Başlatma
 
 1.  VS Code veya tercih ettiğiniz bir editörde `frontend` klasörünü açın.
-2.  Terminali açarak `frontend` klasörüne gidin: `cd frontend`.
-3.  Proje bağımlılıklarını yükleyin:
+2.  Terminali açarak `frontend` klasörüne gidin.
+3.  Tüm proje bağımlılıklarını yükleyin:
     ```bash
     npm install
     ```
-4.  Uygulamayı geliştirme modunda çalıştırın:
+4.  Uygulamayı geliştirme modunda başlatın:
     ```bash
     npm run dev
     ```
