@@ -47,6 +47,7 @@ Projenin hem frontend hem de backend kısımlarını ayrı ayrı çalıştırman
     ```bash
     npm run dev
     ```
+![Vite-React-Google-Chrome-2025-08-11-22-56-24](https://github.com/user-attachments/assets/1e72fa7f-3436-4fd4-9aaf-46d23ca321a1)
 
 ## Katkıda Bulunma
 
