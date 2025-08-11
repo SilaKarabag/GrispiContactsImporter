@@ -1,0 +1,5 @@
+satir_no,external_id,first_name,last_name,email,phone,organization,language,tags,groups,role,enabled,durum,hatalar
+"1","","","","ahmet@example.com","5.551234567E9","","","","","","true","eksik/hatalı","Ad (First Name) alanı boş olamaz.;Soyad (Last Name) alanı boş olamaz.;Geçersiz telefon numarası formatı (E.164 bekleniyor): '5.551234567E9'"
+"2","","","","ayse@example.com","5.557654321E9","","","","","","true","eksik/hatalı","Ad (First Name) alanı boş olamaz.;Soyad (Last Name) alanı boş olamaz.;Geçersiz telefon numarası formatı (E.164 bekleniyor): '5.557654321E9'"
+"3","","","","mehmet@example.com","5.559876543E9","","","","","","true","eksik/hatalı","Ad (First Name) alanı boş olamaz.;Soyad (Last Name) alanı boş olamaz.;Geçersiz telefon numarası formatı (E.164 bekleniyor): '5.559876543E9'"
+"4","","","","elif@example.com","5.552345678E9","","","","","","true","eksik/hatalı","Ad (First Name) alanı boş olamaz.;Soyad (Last Name) alanı boş olamaz.;Geçersiz telefon numarası formatı (E.164 bekleniyor): '5.552345678E9'"

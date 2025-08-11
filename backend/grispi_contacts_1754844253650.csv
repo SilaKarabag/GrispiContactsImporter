@@ -1,0 +1,11 @@
+satir_no,external_id,first_name,last_name,email,phone,organization,language,tags,groups,role,enabled,durum,hatalar
+"1","","","Yılmaz","","9.05321234567E11","","","vip;customer","","agent","true","eksik/hatalı","Ad (First Name) alanı boş olamaz.;Geçersiz telefon numarası formatı (E.164 bekleniyor): '9.05321234567E11'"
+"2","","","Demir","","","","","","","partner","true","eksik/hatalı","Ad (First Name) alanı boş olamaz.;E-posta veya telefon numarası alanlarından en az biri girilmelidir."
+"3","","","Can","","9.05559876543E11","","","tester","","","true","eksik/hatalı","Ad (First Name) alanı boş olamaz.;Geçersiz telefon numarası formatı (E.164 bekleniyor): '9.05559876543E11'"
+"4","","","Kaya","","9.05441231234E11","","","new_client","","customer","true","eksik/hatalı","Ad (First Name) alanı boş olamaz.;Geçersiz telefon numarası formatı (E.164 bekleniyor): '9.05441231234E11'"
+"5","","","Veli","","","","","","","","true","eksik/hatalı","Ad (First Name) alanı boş olamaz.;E-posta veya telefon numarası alanlarından en az biri girilmelidir."
+"6","","","Ak","","","","","","","","true","eksik/hatalı","Ad (First Name) alanı boş olamaz.;E-posta veya telefon numarası alanlarından en az biri girilmelidir."
+"7","","","Su","","5.331112233E9","","","premium","","agent","true","eksik/hatalı","Ad (First Name) alanı boş olamaz.;Geçersiz telefon numarası formatı (E.164 bekleniyor): '5.331112233E9'"
+"8","","","Tunç","","5.309998877E9","","","","","","true","eksik/hatalı","Ad (First Name) alanı boş olamaz.;Geçersiz telefon numarası formatı (E.164 bekleniyor): '5.309998877E9'"
+"9","","","","","9.05431234567E11","","","","","","true","eksik/hatalı","Ad (First Name) alanı boş olamaz.;Soyad (Last Name) alanı boş olamaz.;Geçersiz telefon numarası formatı (E.164 bekleniyor): '9.05431234567E11'"
+"10","","","Eren","","9.05439876543E11","","","","","","true","eksik/hatalı","Ad (First Name) alanı boş olamaz.;Geçersiz telefon numarası formatı (E.164 bekleniyor): '9.05439876543E11'"

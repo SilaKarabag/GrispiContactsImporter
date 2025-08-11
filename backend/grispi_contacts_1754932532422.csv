@@ -1,0 +1,4 @@
+satir_no,external_id,first_name,last_name,email,phone,organization,language,tags,groups,role,enabled,durum,hatalar
+"1","","Alice","","","+905321234567","Org1","","","","","true","eksik/hatalı","Soyad (Last Name) alanı boş olamaz."
+"2","","Bob","","","+905321234567","Org2","","","","","true","eksik/hatalı","Soyad (Last Name) alanı boş olamaz."
+"3","","Charlie","","","12345","Org3","","","","","true","eksik/hatalı","Soyad (Last Name) alanı boş olamaz.;Geçersiz telefon numarası formatı (E.164 bekleniyor): '12345'"

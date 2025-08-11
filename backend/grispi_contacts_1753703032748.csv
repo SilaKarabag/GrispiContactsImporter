@@ -1,0 +1,11 @@
+satir_no,external_id,first_name,last_name,email,phone,organization,language,tags,groups,role,enabled,durum,hatalar
+"1","U001","Ahmet","Yılmaz","ahmet.yilmaz@example.com","905321234567","Grispi A.Ş.","tr-TR","vip;customer","Support;Sales","agent","true","eksik/hatalı","Geçersiz telefon numarası formatı (E.164 bekleniyor): '905321234567'"
+"2","U002","Ayşe","Demir","ayse.demir@example.com","","","","","en-US","partner","false","başarılı",""
+"3","U003","Mehmet","Can","mehmetcan@example.com","905559876543","Can Tech","tr-TR","tester","Developers","","true","eksik/hatalı","Geçersiz telefon numarası formatı (E.164 bekleniyor): '905559876543'"
+"4","U004","Zeynep","Kaya","","905441231234","Kaya İnşaat","tr-TR","new_client","Customers","customer","true","eksik/hatalı","Geçersiz telefon numarası formatı (E.164 bekleniyor): '905441231234'"
+"5","U005","Ali","Veli","invalid-email","","","","","en-US","","true","eksik/hatalı","Geçersiz e-posta formatı: 'invalid-email'"
+"6","U006","Deniz","Ak","","","","","","","","false","eksik/hatalı","E-posta veya telefon numarası alanlarından en az biri girilmelidir."
+"7","U007","Gamze","Su","gamze.su@example.com","+905331112233","Su Danışmanlık","tr-TR","premium","","agent","true","başarılı",""
+"8","U008","Cem","Tunç","cem@tunc.com","+905309998877","","","","","","true","başarılı",""
+"9","U009","Emre","","emre@example.com","905431234567","","","","","","true","eksik/hatalı","Soyad (Last Name) alanı boş olamaz.;Geçersiz telefon numarası formatı (E.164 bekleniyor): '905431234567'"
+"10","U010","","Eren","eren@example.com","905439876543","","","","","","true","eksik/hatalı","Ad (First Name) alanı boş olamaz.;Geçersiz telefon numarası formatı (E.164 bekleniyor): '905439876543'"

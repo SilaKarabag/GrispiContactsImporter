@@ -1,0 +1,4 @@
+satir_no,external_id,first_name,last_name,email,phone,organization,language,tags,groups,role,enabled,durum,hatalar
+"1","","Alice","Smith","","+905321234567","","","","","","true","başarılı",""
+"2","","Bob","Brown","","+905321234567","","","","","","true","başarılı",""
+"3","","Charlie","Davis","","12345","","","","","","true","eksik/hatalı","Geçersiz telefon numarası formatı (E.164 bekleniyor): '12345'"
