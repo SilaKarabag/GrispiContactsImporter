@@ -44,34 +44,37 @@ public class Main {
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 
         System.out.println("=== Grispi Contacts Importer ===");
-        System.out.println("Excel dosyalarını Grispi contact formatına dönüştürür\n");
 
         try {
-            // Excel dosyasını yükle
-            String excelFileName = "Grispi Import Template (1).xlsx";
-            List<Map<String, Object>> excelData = loadExcelFile(excelFileName);
+            System.out.print("İçe aktarılacak dosya yolunu girin (.xlsx veya .csv): ");
+            String filePath = scanner.nextLine().trim();
 
-            if (excelData.isEmpty()) {
-                System.err.println("Excel dosyasından veri okunamadı veya dosya boş!");
+// Eğer yol çift veya tek tırnak ile başlıyorsa/sınırlanmışsa temizle
+            if ((filePath.startsWith("\"") && filePath.endsWith("\"")) ||
+                    (filePath.startsWith("'") && filePath.endsWith("'"))) {
+                filePath = filePath.substring(1, filePath.length() - 1);
+            }
+
+            List<Map<String, Object>> data;
+            if (filePath.toLowerCase().endsWith(".csv")) {
+                data = loadCsvFile(filePath);
+            } else {
+                data = loadExcelFile(filePath);
+            }
+
+            if (data.isEmpty()) {
+                System.err.println("Dosyadan veri okunamadı veya dosya boş!");
                 return;
             }
 
-            // Önizleme göster
-            showPreview(excelData);
+            showPreview(data);
 
-            // Sütun eşleştirmesi yap
-            Map<String, String> columnMapping = createColumnMapping(excelData.get(0).keySet());
-
-            // Şablonu kaydetme seçeneği
+            Map<String, String> columnMapping = createColumnMapping(data.get(0).keySet());
             saveTemplateOption(columnMapping);
 
-            // Verileri dönüştür
-            List<Contact> contacts = transformData(excelData, columnMapping);
+            List<Contact> contacts = transformData(data, columnMapping);
 
-            // Sonuçları kaydet
             saveResults(contacts);
-
-            // Rapor göster
             showReport(contacts);
 
         } catch (Exception e) {
@@ -82,42 +85,37 @@ public class Main {
         }
     }
 
-    private static List<Map<String, Object>> loadExcelFile(String fileName) throws IOException {
+    private static List<Map<String, Object>> loadExcelFile(String filePath) throws IOException {
         List<Map<String, Object>> data = new ArrayList<>();
 
-        int sheetIndexToRead = 4;
+        try (InputStream excelFile = new FileInputStream(filePath);
+             Workbook workbook = new XSSFWorkbook(excelFile)) {
 
-        try (InputStream excelFile = Main.class.getClassLoader().getResourceAsStream(fileName)) {
-            if (excelFile == null) {
-                throw new FileNotFoundException("Excel dosyası bulunamadı: " + fileName+ ". Lütfen src/main/resources altında olduğundan emin olun.");
+            // Boş olmayan ilk sheet'i bul
+            Sheet sheet = null;
+            for (int i = 0; i < workbook.getNumberOfSheets(); i++) {
+                Sheet candidate = workbook.getSheetAt(i);
+                if (candidate.getPhysicalNumberOfRows() > 0) {
+                    sheet = candidate;
+                    break;
+                }
             }
+            if (sheet == null) return data;
 
-            Workbook workbook = new XSSFWorkbook(excelFile);
-            Sheet sheet = workbook.getSheetAt(sheetIndexToRead); // Belirli bir sayfayı oku
             System.out.println("Okunan Sayfa Adı: " + sheet.getSheetName());
 
             Iterator<Row> rowIterator = sheet.iterator();
-
-            // Başlık satırını al
-            if (!rowIterator.hasNext()) {
-                workbook.close();
-                System.out.println("Excel dosyasının '" + sheet.getSheetName() + "' sayfasında veri bulunamadı.");
-                return data;
-            }
+            if (!rowIterator.hasNext()) return data;
 
             Row headerRow = rowIterator.next();
             List<String> headers = new ArrayList<>();
-
             for (Cell cell : headerRow) {
                 headers.add(cell.toString().trim());
             }
 
-            // Veri satırlarını oku
             while (rowIterator.hasNext()) {
                 Row currentRow = rowIterator.next();
                 Map<String, Object> rowData = new HashMap<>();
-
-                // Eğer tüm hücreler boşsa, satırı atla
                 boolean isRowEmpty = true;
                 for (int i = 0; i < headers.size(); i++) {
                     Cell cell = currentRow.getCell(i);
@@ -127,51 +125,55 @@ public class Main {
                         isRowEmpty = false;
                     }
                 }
-
-                if (!isRowEmpty) {
-                    data.add(rowData);
-                }
+                if (!isRowEmpty) data.add(rowData);
             }
-            workbook.close();
         }
+        return data;
+    }
 
-        System.out.println("Excel dosyası başarıyla okundu: " + data.size() + " satır (sayfa " + sheetIndexToRead + ")");
+    private static List<Map<String, Object>> loadCsvFile(String filePath) throws IOException {
+        List<Map<String, Object>> data = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String headerLine = br.readLine();
+            if (headerLine == null) return data;
+            String[] headers = Arrays.stream(headerLine.split(","))
+                    .map(h -> h.trim())
+                    .toArray(String[]::new);
+
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(",");
+                Map<String, Object> row = new HashMap<>();
+                for (int i = 0; i < headers.length; i++) {
+                    row.put(headers[i], i < values.length ? values[i].trim() : "");
+                }
+                data.add(row);
+            }
+        }
         return data;
     }
 
     private static Object getCellValue(Cell cell) {
         if (cell == null) return null;
-
         switch (cell.getCellType()) {
-            case STRING:
-                return cell.getStringCellValue().trim();
+            case STRING: return cell.getStringCellValue().trim();
             case NUMERIC:
                 if (DateUtil.isCellDateFormatted(cell)) {
-                    // Tarihi Epoch milisaniyeye dönüştür
-                    return cell.getDateCellValue().getTime(); // long tipi döner
+                    return cell.getDateCellValue().getTime();
                 } else {
                     double numValue = cell.getNumericCellValue();
-                    if (numValue == (long) numValue) {
-                        return (long) numValue; // Tam sayı ise long olarak dön
-                    }
-                    return numValue; // Ondalıklı ise double olarak dön
+                    return (numValue == (long) numValue) ? (long) numValue : numValue;
                 }
-            case BOOLEAN:
-                return cell.getBooleanCellValue();
-            case FORMULA:
-                // Formül sonucunu değerlendirmek için bir DataFormatter kullanabilirsiniz
-                // DataFormatter formatter = new DataFormatter();
-                // return formatter.formatCellValue(cell);
-                return cell.getCellFormula(); // Şimdilik formülün kendisini döndürelim
-            case BLANK:
-                return null;
-            default:
-                return null;
+            case BOOLEAN: return cell.getBooleanCellValue();
+            case FORMULA: return cell.getCellFormula();
+            default: return null;
         }
     }
 
+
+
     private static void showPreview(List<Map<String, Object>> data) {
-        System.out.println("\n=== EXCEL VERİ ÖNİZLEMESİ ===");
+        System.out.println("\n=== VERİ ÖNİZLEMESİ ===");
 
         if (data.isEmpty()) {
             System.out.println("Önizlenecek veri yok.");
@@ -179,9 +181,9 @@ public class Main {
         }
 
         Set<String> columns = data.get(0).keySet();
-        System.out.println("Bulunan Excel sütunları: " + columns);
-        System.out.println("\nİlk 3 veri satırı:");
+        System.out.println("Bulunan sütunlar: " + columns);
 
+        System.out.println("\nİlk 3 veri satırı:");
         for (int i = 0; i < Math.min(3, data.size()); i++) {
             System.out.println("\nSatır " + (i + 1) + ":");
             Map<String, Object> row = data.get(i);
@@ -193,42 +195,32 @@ public class Main {
     }
 
 
+
     private static Map<String, String> createColumnMapping(Set<String> excelColumns) {
-        System.out.println("\n=== SÜTUN EŞLEŞTİRMESİ ===");
-        System.out.println("Excel sütunlarını Grispi contact alanlarıyla eşleştirin.");
-        System.out.println("Otomatik eşleştirme için Excel sütun adlarını (örn. 'Email', 'First Name') doğru girin.");
-        System.out.println("Boş bırakmak için sadece Enter'a basın (bu alanı atlar).\n");
-
         Map<String, String> mapping = new HashMap<>();
-
-        System.out.println("Grispi Alanları ve Beklenen Excel Sütunları:");
-        GRISPI_FIELDS.forEach((key, value) -> System.out.println("- " + value + " -> Grispi'de '" + key + "'"));
-
-        System.out.println("\nExcel dosyanızdaki sütunlar: " + excelColumns);
-        System.out.println("\nEşleştirme Başlıyor:");
+        Set<String> normalizedExcelColumns = excelColumns.stream()
+                .map(c -> c.trim().toLowerCase())
+                .collect(Collectors.toSet());
 
         for (Map.Entry<String, String> grispiField : GRISPI_FIELDS.entrySet()) {
             String grispiFieldName = grispiField.getKey();
-            String grispiFieldDescription = grispiField.getValue();
+            String grispiFieldDesc = grispiField.getValue();
 
-            System.out.print(grispiFieldDescription + " için Excel sütunu (örn: '" + grispiFieldDescription.split(" \\(")[0] + "' gibi): ");
-            String excelColumnInput = scanner.nextLine().trim();
-
-            if (!excelColumnInput.isEmpty()) {
-                // Kullanıcının girdiği sütun adını Excel sütunlarında ara
-                if (excelColumns.contains(excelColumnInput)) {
-                    mapping.put(excelColumnInput, grispiFieldName);
-                    System.out.println("✓ Eşleştirildi: Excel '" + excelColumnInput + "' -> Grispi '" + grispiFieldName + "'");
+            System.out.print(grispiFieldDesc + " için Excel sütunu: ");
+            String input = scanner.nextLine().trim();
+            if (!input.isEmpty()) {
+                String normalizedInput = input.toLowerCase();
+                if (normalizedExcelColumns.contains(normalizedInput)) {
+                    // Orijinal sütun adını bul
+                    String original = excelColumns.stream()
+                            .filter(c -> c.trim().equalsIgnoreCase(input))
+                            .findFirst().orElse(input);
+                    mapping.put(original, grispiFieldName);
                 } else {
-                    System.out.println("⚠ Excel sütunu bulunamadı: '" + excelColumnInput + "'. Bu eşleştirme atlanacak.");
+                    System.out.println("⚠ Sütun bulunamadı, atlandı.");
                 }
-            } else {
-                System.out.println("Bu alan için eşleştirme atlandı.");
             }
         }
-
-        System.out.println("\nEşleştirme tamamlandı!");
-        System.out.println("Kesinleşen Eşleştirmeler: " + mapping);
         return mapping;
     }
 
