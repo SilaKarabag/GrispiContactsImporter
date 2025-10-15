@@ -1,0 +1,28 @@
+# Intellij IDEA & IDE files
+.idea/
+*.iml
+*.iws
+
+# Java / Maven Build Output
+/backend/target/
+
+# Node.js Build & Dependency Output
+/frontend/node_modules/
+/frontend/dist/
+/frontend/.vite/
+
+# Application Generated Output Files
+# Bu dosyalar uygulamanın çalışmasıyla oluşur ve repoda olmamalıdır
+grispi_contacts_*.json
+grispi_contacts_*.csv
+template_*.json
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
