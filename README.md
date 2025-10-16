@@ -1,98 +1,101 @@
-# Grispi Data Importer 🚀
+# Grispi Veri İçe Aktarma Aracı 🚀
 
-![Project Status](https://img.shields.io/badge/status-active-brightgreen)
+![Proje Durumu](https://img.shields.io/badge/durum-aktif-brightgreen)
 ![Frontend](https://img.shields.io/badge/Frontend-React%20%26%20Ant%20Design-blueviolet)
 ![Backend](https://img.shields.io/badge/Backend-Java%20%26%20Javalin-orange)
 
-An advanced web application designed to streamline the process of importing and validating data from **Excel (.xlsx)** and **CSV** files into the Grispi platform. It features a modern, multi-step wizard to manage data loading, dynamic field mapping, comprehensive row-by-row validation, and result generation.
+Bu proje, Grispi platformuna **Excel (.xlsx)** ve **CSV** dosyalarından veri içe aktarımını kolaylaştırmak için geliştirilmiş, modern bir web uygulamasıdır. Kullanıcı dostu, çok adımlı bir sihirbaz arayüzü ile veri yükleme, dinamik alan eşleştirme, kapsamlı satır bazında doğrulama ve sonuç üretme süreçlerini etkin bir şekilde yönetir.
 
 ---
 
-## ✨ Core Features
+## ✨ Temel Özellikler
 
-* **🪄 Multi-Step Wizard Interface:** Guides users seamlessly through the upload, preview, mapping, summary, and result steps for an intuitive experience.
+* **🪄 Çok Adımlı Sihirbaz Arayüzü:** Kullanıcıları; yükleme, önizleme, eşleştirme, özet ve sonuç adımlarında sorunsuz bir şekilde yönlendirerek sezgisel bir deneyim sunar.
 
-* **📄 Universal File Support:** Natively handles both **Excel (.xlsx)** and **CSV** files without requiring any conversion.
+* **📄 Evrensel Dosya Desteği:** Hem **Excel (.xlsx)** hem de **CSV** dosyalarını herhangi bir dönüştürme işlemine gerek kalmadan doğrudan işler.
 
-* **🔗 Dynamic Field Mapping:** Provides a complete list of relevant Grispi fields based on the selected import type (`Contact`, `Ticket`, `Organization`), allowing for flexible data mapping.
+* **🔗 Akıllı ve Esnek Alan Eşleştirme:**
+    * **Otomatik Eşleştirme Önerisi:** Excel dosyasındaki kolon başlıklarını analiz ederek olası Grispi alanlarını otomatik olarak önerir ve zamandan kazandırır.
+    * **Şablon Sistemi:** Kullanıcıların yaptıkları kolon eşleştirme ayarlarını şablon olarak kaydetmelerine ve gelecekteki içe aktarımlarda tek tıkla yüklemelerine olanak tanır.
+    * **Özel Alan Desteği (Custom Fields):** Standart alanların dışında, `ui.renk` gibi özel alanların manuel olarak eklenmesine izin vererek tam esneklik sağlar.
 
-* **✅ Advanced Backend Validation:**
-    * Performs real-time, row-by-row validation via a powerful Java backend API.
-    * Enforces mandatory field rules (e.g., `name` for Organization, or either `email`/`phone` for Contact).
-    * Validates data formats, including **E.164 for phone numbers** and valid email structures.
-    * Provides clear, **specific error messages for each incorrect row** (e.g., "Row 5: At least one of the mapped Email or Phone fields must be filled.").
-    * Offers a **"Proceed Anyway"** option, allowing users to ignore faulty rows and continue with the valid data.
+* **✅ Gelişmiş Backend Doğrulaması:**
+    * Güçlü bir Java API'si aracılığıyla gerçek zamanlı ve satır bazında doğrulama yapar.
+    * Zorunlu alan kurallarını uygular (Örn: `Contact` için `email` VEYA `phone` zorunluluğu).
+    * **E.164 telefon formatı** ve geçerli e-posta yapıları gibi veri formatlarını kontrol eder.
+    * Her hatalı satır için **spesifik ve anlaşılır hata mesajları** üretir (Örn: "Satır 5: Eşleştirilen Email veya Telefon alanlarından en az biri dolu olmalıdır.").
+    * **"Yine de Devam Et"** seçeneği ile kullanıcının hatalı satırları göz ardı ederek geçerli verilerle ilerlemesine olanak tanır.
 
-* **📊 Detailed Reporting & JSON Output:**
-    * Presents a clear summary of successful and failed rows after validation.
-    * Allows users to download **only the successfully validated data** as a clean JSON file, ready for import.
+* **📊 Detaylı Raporlama ve Çıktı Seçenekleri:**
+    * Doğrulama sonrası başarılı ve hatalı satır sayılarını net bir özetle sunar.
+    * Kullanıcıların **sadece başarıyla doğrulanmış verileri** hem **JSON** hem de **CSV** formatında indirmesine imkan tanır.
 
-* **🌐 Internationalization (i18n):** The user interface is fully translated into English using `react-i18next`, with a structure that allows for easy addition of new languages in the future.
+* **🌐 Uluslararasılaştırma (i18n):** Arayüz, `react-i18next` altyapısı kullanılarak tamamen İngilizce'ye çevrilmiştir ve gelecekte yeni dillerin eklenmesi için uygun bir yapıya sahiptir.
 
 ---
 
-## 🛠️ Technology Stack
+## 🛠️ Kullanılan Teknolojiler
 
-| Area      | Technologies                                                                 |
+| Alan      | Teknolojiler                                                                 |
 | :-------- | :--------------------------------------------------------------------------- |
 | **Frontend** | `React`, `Vite`, `Ant Design 5.x`, `react-i18next`, `xlsx`                 |
-| **Backend** | `Java 17`, `Javalin` (Web Server), `Maven`, `Jackson`, `libphonenumber` |
+| **Backend** | `Java 17`, `Javalin` (Web Sunucusu), `Maven`, `Jackson`, `libphonenumber` |
 
 ---
 
-## 🏗️ Project Structure
+## 🏗️ Proje Mimarisi
 
 ```
 GrispiContactsImporter/
-├── backend/              # Java (Javalin) + Maven Backend API
+├── backend/              # Java (Javalin) + Maven Backend API'si
 │   └── src/main/java/com/grispi/importer/
-│       ├── Server.java         # Javalin Web Server
-│       └── Main.java           # Core Validation Logic
-├── frontend/             # React + Vite Frontend
+│       ├── Server.java         # Javalin Web Sunucusu
+│       └── Main.java           # Temel Doğrulama Mantığı
+├── frontend/             # React + Vite Frontend Uygulaması
 │   └── src/
-│       ├── pages/          # Step components (Upload, Mapping, etc.)
-│       └── i18n/           # Internationalization config
+│       ├── pages/          # Adım bileşenleri (Upload, Mapping, vb.)
+│       └── i18n/           # Uluslararasılaştırma yapılandırması
 └── .gitignore
 ```
 
 ---
 
-## 🚀 Setup and Running
+## 🚀 Kurulum ve Çalıştırma
 
-You need to run both the frontend and backend parts of the project separately.
+Projenin hem frontend hem de backend kısımlarını ayrı ayrı çalıştırmanız gerekmektedir.
 
-### 1. Backend (Javalin Server)
+### 1. Backend (Javalin Sunucusu)
 
-1.  Open the `backend` folder in IntelliJ IDEA.
-2.  Allow Maven to download the dependencies from `pom.xml`.
-3.  Run the `main` method in the **`Server.java`** class to start the server.
-    > The backend will be running at `http://localhost:7000`.
+1.  `backend` klasörünü IntelliJ IDEA'da açın.
+2.  Maven'in `pom.xml` dosyasındaki bağımlılıkları indirmesine izin verin.
+3.  **`Server.java`** sınıfındaki `main` metodunu çalıştırarak sunucuyu başlatın.
+    > Backend `http://localhost:7000` adresinde çalışmaya başlayacaktır.
 
-### 2. Frontend (React App)
+### 2. Frontend (React Uygulaması)
 
-1.  Open the `frontend` folder in VS Code.
-2.  Open a terminal and install all dependencies:
+1.  `frontend` klasörünü VS Code'da açın.
+2.  Bir terminal açın ve tüm bağımlılıkları yükleyin:
     ```bash
     npm install
     ```
-3.  Start the development server:
+3.  Uygulamayı geliştirme modunda başlatın:
     ```bash
     npm run dev
     ```
-    > The frontend will be running at `http://localhost:5173`.
+    > Frontend, terminalde gösterilen adreste (genellikle `http://localhost:5173`) çalışmaya başlayacaktır.
 
 ---
 
-## 🔌 API Endpoints
+## 🔌 API Uç Noktaları
 
-This section documents the API endpoint provided by the backend server for the frontend to use.
+Bu bölüm, backend sunucusunun frontend tarafından kullanılmak üzere sağladığı API uç noktasını belgeler.
 
-| Method | Endpoint        | Description                                                  |
-| :----- | :-------------- | :----------------------------------------------------------- |
-| `POST` | `/api/validate` | Receives data, mapping, and import type. Returns a detailed, row-by-row validation result. |
+| Metod | Uç Nokta        | Açıklama                                                  |
+| :---- | :-------------- | :----------------------------------------------------------- |
+| `POST` | `/api/validate` | Veri, eşleştirme ve içe aktarma tipini alır. Detaylı, satır bazında bir doğrulama sonucu döndürür. |
 
 ---
 
-## Contributing
+## Katkıda Bulunma
 
-I am always open to ideas and improvements. Feel free to contact me to suggest new features or report bugs by opening an issue.
+Geliştirme fikirlerine ve iyileştirmelere her zaman açığım. Yeni özellikler önermek veya hataları bildirmek için çekinmeden bir "issue" açarak iletişime geçebilirsiniz.
