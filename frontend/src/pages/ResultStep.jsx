@@ -1,9 +1,28 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Typography, Space, notification, Alert, Card, Statistic, List, Tag } from 'antd';
-import { DownloadOutlined, CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
+import { DownloadOutlined, CheckCircleOutlined, CloseCircleOutlined, FileTextOutlined } from '@ant-design/icons';
 
 const { Title, Paragraph, Text } = Typography;
+
+// Yardımcı Fonksiyon: JSON verisini CSV metnine dönüştürür
+const jsonToCsv = (jsonData) => {
+    if (!jsonData || jsonData.length === 0) {
+        return "";
+    }
+    const headers = Object.keys(jsonData[0]);
+    const csvRows = [];
+    csvRows.push(headers.join(','));
+
+    for (const row of jsonData) {
+        const values = headers.map(header => {
+            const escaped = ('' + (row[header] || '')).replace(/"/g, '""'); // Çift tırnakları escape et
+            return `"${escaped}"`;
+        });
+        csvRows.push(values.join(','));
+    }
+    return csvRows.join('\n');
+};
 
 const ResultStep = ({ onPrev, validationResults = [] }) => {
   const { t } = useTranslation();
@@ -19,13 +38,9 @@ const ResultStep = ({ onPrev, validationResults = [] }) => {
 
   const handleDownloadJson = () => {
     if (!finalJsonData || finalJsonData.length === 0) {
-      notification.error({
-        message: 'Error',
-        description: t('download_error_no_data'),
-      });
+      notification.error({ message: 'Error', description: t('download_error_no_data') });
       return;
     }
-
     const jsonString = JSON.stringify(finalJsonData, null, 2);
     const blob = new Blob([jsonString], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
@@ -36,10 +51,25 @@ const ResultStep = ({ onPrev, validationResults = [] }) => {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
-    notification.success({
-      message: 'Success',
-      description: t('download_success_message'),
-    });
+    notification.success({ message: 'Success', description: t('download_success_message') });
+  };
+
+  const handleDownloadCsv = () => {
+    if (!finalJsonData || finalJsonData.length === 0) {
+        notification.error({ message: 'Error', description: t('download_error_no_data') });
+        return;
+    }
+    const csvString = jsonToCsv(finalJsonData);
+    const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `grispi_import_success.csv`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    notification.success({ message: 'Success', description: t('download_success_message') });
   };
 
   if (!validationResults || validationResults.length === 0) {
@@ -114,6 +144,16 @@ const ResultStep = ({ onPrev, validationResults = [] }) => {
           disabled={finalJsonData.length === 0}
         >
           {t('btn_download_json')}
+        </Button>
+        
+        <Button
+            type="primary"
+            icon={<FileTextOutlined />}
+            onClick={handleDownloadCsv}
+            disabled={finalJsonData.length === 0}
+            ghost
+        >
+            {t('btn_download_csv')}
         </Button>
       </Space>
     </div>

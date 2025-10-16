@@ -63,11 +63,19 @@
   "result_json_preview_desc": "Below is a JSON preview of only the successfully mapped data.",
   "result_no_successful_data": "No successful data to preview or download.",
   "download_error_no_data": "No successful data to download.",
-  "download_success_message": "JSON file downloaded successfully.",
+  "download_success_message": "File downloaded successfully.",
 
   "btn_back": "Back",
   "btn_continue": "Continue",
   "btn_proceed_anyway": "Proceed Anyway",
   "btn_validating": "Validating...",
-  "btn_download_json": "Download as JSON"
+  "btn_download_json": "Download as JSON",
+  "btn_download_csv": "Download as CSV",
+
+  "btn_save_template": "Save as Template",
+  "btn_load_template": "Load Template",
+  "template_load_success": "Template loaded successfully.",
+  "template_load_error": "Failed to load template. The file may be invalid.",
+  "custom_field_option": "--- Add a Custom Field ---",
+  "custom_field_placeholder": "Enter custom field name (e.g., ui.color)"
 }
