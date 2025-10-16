@@ -1,54 +1,98 @@
-# Grispi İçe Aktarma Aracı
+# Grispi Data Importer 🚀
 
-Bu proje, Grispi platformuna CSV dosyalarından veri içe aktarımını kolaylaştırmak için geliştirilmiş, çok adımlı bir masaüstü uygulamasıdır. Kullanıcı dostu bir arayüz ile veri yükleme, dinamik eşleme, kapsamlı doğrulama ve sonuç özetleme süreçlerini etkin bir şekilde yönetir.
+![Project Status](https://img.shields.io/badge/status-active-brightgreen)
+![Frontend](https://img.shields.io/badge/Frontend-React%20%26%20Ant%20Design-blueviolet)
+![Backend](https://img.shields.io/badge/Backend-Java%20%26%20Javalin-orange)
 
-## Proje Mimarisi
+An advanced web application designed to streamline the process of importing and validating data from **Excel (.xlsx)** and **CSV** files into the Grispi platform. It features a modern, multi-step wizard to manage data loading, dynamic field mapping, comprehensive row-by-row validation, and result generation.
 
-Uygulama, iki ana bölümden oluşmaktadır:
+---
 
-### Frontend
-Frontend, kullanıcı deneyimini ve arayüz etkileşimlerini yönetir. React ve Ant Design kullanılarak geliştirilmiştir. Dosya yükleme, kolon eşleme ve sonuçların görselleştirilmesi gibi tüm kullanıcıya dönük işlemler bu kısımda gerçekleşir.
+## ✨ Core Features
 
-### Backend
-Backend, standart bir Java uygulamasıdır. Maven tabanlı proje yönetim sistemi ile bağımlılıkları yönetir. Uygulamanın temel dosya okuma ve işleme mantığı bu kısımda bulunur.
+* **🪄 Multi-Step Wizard Interface:** Guides users seamlessly through the upload, preview, mapping, summary, and result steps for an intuitive experience.
 
-## Temel Özellikler
+* **📄 Universal File Support:** Natively handles both **Excel (.xlsx)** and **CSV** files without requiring any conversion.
 
-* **Çok Adımlı Kılavuz:** Dosya yükleme, alan eşleme, özet ve sonuç ekranlarını içeren sezgisel bir akış sunar.
-* **Dinamik Eşleme:** Yüklenen CSV dosyasının türüne (`Contact`, `Ticket`, `Organization`) göre ilgili Grispi alanlarını otomatik olarak eşleştirme seçenekleri sunar.
-* **Gelişmiş Veri Doğrulama:** Zorunlu alanların eşleştirilmesini ve bu alanlardaki verilerin boş olup olmadığını satır bazında kontrol ederek güvenilir bir içe aktarım süreci sağlar.
-* **Detaylı Sonuç Raporu:** İçe aktarma sonunda, başarılı ve hatalı satır sayılarını gösteren, hataların nedenlerini açıklayan kapsamlı bir özet sunar.
-* **JSON Çıktısı:** Sadece başarılı bir şekilde doğrulanmış verileri içeren JSON çıktısını indirme imkanı tanır.
+* **🔗 Dynamic Field Mapping:** Provides a complete list of relevant Grispi fields based on the selected import type (`Contact`, `Ticket`, `Organization`), allowing for flexible data mapping.
 
-## Kullanılan Teknolojiler
+* **✅ Advanced Backend Validation:**
+    * Performs real-time, row-by-row validation via a powerful Java backend API.
+    * Enforces mandatory field rules (e.g., `name` for Organization, or either `email`/`phone` for Contact).
+    * Validates data formats, including **E.164 for phone numbers** and valid email structures.
+    * Provides clear, **specific error messages for each incorrect row** (e.g., "Row 5: At least one of the mapped Email or Phone fields must be filled.").
+    * Offers a **"Proceed Anyway"** option, allowing users to ignore faulty rows and continue with the valid data.
 
-* **Frontend:** React, Vite, Ant Design
-* **Backend:** Java, Maven
+* **📊 Detailed Reporting & JSON Output:**
+    * Presents a clear summary of successful and failed rows after validation.
+    * Allows users to download **only the successfully validated data** as a clean JSON file, ready for import.
 
-## Kurulum ve Çalıştırma
+* **🌐 Internationalization (i18n):** The user interface is fully translated into English using `react-i18next`, with a structure that allows for easy addition of new languages in the future.
 
-Projenin hem frontend hem de backend kısımlarını ayrı ayrı çalıştırmanız gerekmektedir.
+---
 
-### Backend'i Başlatma
+## 🛠️ Technology Stack
 
-1.  IntelliJ IDEA veya tercih ettiğiniz bir Java IDE'sinde `backend` klasörünü açın.
-2.  Maven bağımlılıklarını `pom.xml` üzerinden yükleyin.
-3.  Uygulamanın ana sınıfını (`main` metodu içeren sınıf) çalıştırarak backend işlevselliğini başlatın.
+| Area      | Technologies                                                                 |
+| :-------- | :--------------------------------------------------------------------------- |
+| **Frontend** | `React`, `Vite`, `Ant Design 5.x`, `react-i18next`, `xlsx`                 |
+| **Backend** | `Java 17`, `Javalin` (Web Server), `Maven`, `Jackson`, `libphonenumber` |
 
-### Frontend'i Başlatma
+---
 
-1.  VS Code veya tercih ettiğiniz bir editörde `frontend` klasörünü açın.
-2.  Terminali açarak `frontend` klasörüne gidin.
-3.  Tüm proje bağımlılıklarını yükleyin:
+## 🏗️ Project Structure
+
+```
+GrispiContactsImporter/
+├── backend/              # Java (Javalin) + Maven Backend API
+│   └── src/main/java/com/grispi/importer/
+│       ├── Server.java         # Javalin Web Server
+│       └── Main.java           # Core Validation Logic
+├── frontend/             # React + Vite Frontend
+│   └── src/
+│       ├── pages/          # Step components (Upload, Mapping, etc.)
+│       └── i18n/           # Internationalization config
+└── .gitignore
+```
+
+---
+
+## 🚀 Setup and Running
+
+You need to run both the frontend and backend parts of the project separately.
+
+### 1. Backend (Javalin Server)
+
+1.  Open the `backend` folder in IntelliJ IDEA.
+2.  Allow Maven to download the dependencies from `pom.xml`.
+3.  Run the `main` method in the **`Server.java`** class to start the server.
+    > The backend will be running at `http://localhost:7000`.
+
+### 2. Frontend (React App)
+
+1.  Open the `frontend` folder in VS Code.
+2.  Open a terminal and install all dependencies:
     ```bash
     npm install
     ```
-4.  Uygulamayı geliştirme modunda başlatın:
+3.  Start the development server:
     ```bash
     npm run dev
     ```
-![Vite-React-Google-Chrome-2025-08-11-22-56-24](https://github.com/user-attachments/assets/1e72fa7f-3436-4fd4-9aaf-46d23ca321a1)
+    > The frontend will be running at `http://localhost:5173`.
 
-## Katkıda Bulunma
+---
 
-Geliştirme fikirlerine ve iyileştirmelere her zaman açığım. Yeni özellikler önermek veya hataları bildirmek için çekinmeden iletişime geçebilirsiniz.
+## 🔌 API Endpoints
+
+This section documents the API endpoint provided by the backend server for the frontend to use.
+
+| Method | Endpoint        | Description                                                  |
+| :----- | :-------------- | :----------------------------------------------------------- |
+| `POST` | `/api/validate` | Receives data, mapping, and import type. Returns a detailed, row-by-row validation result. |
+
+---
+
+## Contributing
+
+I am always open to ideas and improvements. Feel free to contact me to suggest new features or report bugs by opening an issue.
