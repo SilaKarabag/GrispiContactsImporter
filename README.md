@@ -34,6 +34,12 @@ Bu proje, Grispi platformuna **Excel (.xlsx)** ve **CSV** dosyalarından veri i�
 
 ---
 
+##  Demo
+
+![gif2](https://github.com/user-attachments/assets/6b58903a-5f5b-4bd3-8509-d50651d7b4c9)
+
+---
+
 ## 🛠️ Kullanılan Teknolojiler
 
 | Alan      | Teknolojiler                                                                 |
